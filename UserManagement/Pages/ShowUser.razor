@@ -1,0 +1,52 @@
+﻿
+@page "/fetchuser"
+@using UserManagement.Models
+@using UserManagement.Data
+
+@inject UserService userService
+
+<title>User</title>
+
+
+
+<h1>User List</h1>
+
+
+
+@if (Users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Designation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Age</td>
+                    <td>@user.City</td>
+                    <td>@user.Designation</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<User>? Users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await userService.GetAllUsersAsync();
+    }
+}
