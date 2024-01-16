@@ -14,9 +14,9 @@ namespace UserManagement.Data
             _userContext = userContext;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<GetAllUsersResult>> GetAllUsersAsync()
         {
-            return await _userContext.Users.FromSqlRaw("EXEC GetAllUsers").ToListAsync();
+            return await _userContext.Procedures.GetAllUsersAsync();
         }
 
 
